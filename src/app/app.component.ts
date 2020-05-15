@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'mock-twitter';
+  
+  // TODO do not display nav buttons for login screen
 }
