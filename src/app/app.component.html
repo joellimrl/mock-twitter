@@ -2,7 +2,7 @@
   <div class="container">
     <a routerLink="/" class="logo">Mock Twitter</a>
     <nav>
-      <ul>
+      <ul *ngIf="loginStatus">
         <li><a href="#" routerLink="/home">Home</a></li>
         <li><a href="#" routerLink="/account">Account</a></li>
       </ul>
