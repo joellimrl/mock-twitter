@@ -1,0 +1,99 @@
+
+.play-container {
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+    border: 1px solid lightgray;
+    margin-bottom: 1em;
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    mat-icon {
+        font-size: 2em;
+        padding: .5em;
+    }
+
+    div {
+        padding: .5em;
+
+        .name {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+    button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        padding: .5em;
+        border-radius: 50%;
+    }
+
+    button:hover {
+        background-color: rgb(165, 252, 252);
+    }
+}
+
+.comments {
+    ul {
+        list-style-type: '';
+        margin: 0;
+        padding: 0;
+    }
+
+    .comment {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border: 1px solid lightgray;
+        margin: .2em;
+        padding: .5em;
+
+        .user {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .name {
+            font-weight: bold;
+            padding: .1em;
+        }
+
+        .message {
+            padding-left: 1em;
+        }
+    }
+}
+
+.addingComment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    input {
+        flex: 3;
+        margin: .5em;
+        padding: 1em;
+    }
+    
+    button {
+        flex: 1;
+        font-weight: bold;
+        background: rgb(94, 236, 229);
+        padding: 1em;
+        margin: .5em;
+        cursor: pointer;
+        border-radius: .5em;
+    }
+}

@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div>
+    <p>
+        <input type="text" [(ngModel)]="message"><br>
+        <button (click) = "addTweet()">TWEET!</button>
+    </p>
+
+    <ng-template [ngIf]="tweetsEmpty" [ngIfElse]="tweetsDisplay">
+        <p>Tweet something now!</p>
+    </ng-template>
+
+    <ng-template #tweetsDisplay>
+        <ul>
+            <li *ngFor="let tweet of tweets">
+                <app-tweet-component [tweet]="tweet"></app-tweet-component>
+            </li>
+        </ul>
+    </ng-template>
+</div>
