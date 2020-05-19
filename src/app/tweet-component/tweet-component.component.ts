@@ -1,21 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tweet, Comment } from '../tweet';
-import { Globals } from '../globals'
-
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-tweet-component',
   templateUrl: './tweet-component.component.html',
-  styleUrls: ['./tweet-component.component.scss']
+  styleUrls: ['./tweet-component.component.scss'],
 })
 export class TweetComponentComponent implements OnInit {
   @Input() tweet: Tweet;
 
   comments: Comment[] = [];
-  comment: string = "";
-  addingCommentFlag: boolean = false;
+  comment = '';
+  addingCommentFlag = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.comments = this.tweet.comments;
@@ -25,12 +24,12 @@ export class TweetComponentComponent implements OnInit {
     this.tweet.likes += 1;
   }
 
-  addComment () {
+  addComment() {
     this.addingCommentFlag = false;
-    if (this.comment.trim() === "") return;
-    let newComment = {message: this.comment, author: Globals.user};
-    this.tweet.comments.push(newComment);
-    this.comment = "";
+    if (this.comment.trim() === '') return;
+    // const newComment = { message: this.comment, author: Globals.user };
+    // this.tweet.comments.push(newComment);
+    this.comment = '';
   }
 
   get haveComments() {

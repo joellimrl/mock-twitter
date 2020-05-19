@@ -2,29 +2,35 @@
 
 
 <ng-template [ngIf]="loginStatus" [ngIfElse]="notLoggedIn">
-    <p>You have already logged in as {{ globalUser }}. <br>
+    <p>You have already logged in as {{ currentUser.name }}. <br>
         Please log out under the "Accounts" page if you would like to log in as another user.</p>
 </ng-template>
 
 <ng-template #notLoggedIn>
-    <div class="play-container">
-        <h2>Login</h2>
-        <p>
-            Please enter your username and password <br><br>
-            <input type="text" [(ngModel)]="username" (keydown)="resetMessage()" placeholder="Username"><br>
-            <input type="password" [(ngModel)]="password" (keydown)="resetMessage()" placeholder="Password"><br>
-            <button (click) = "login()">LOGIN</button>
-            <br><br><strong>{{ loginMessage }}</strong>
-        </p>
-    </div>
-    <div class="play-container">
-        <h2>Registration</h2>
-        <p>
-            Register here if you are not registered yet <br><br>
-            <input type="text" [(ngModel)]="registerUsername" (keydown)="resetMessage()" placeholder="Username"><br>
-            <input type="password" [(ngModel)]="registerPassword" (keydown)="resetMessage()" placeholder="Password"><br>
-            <button (click) = "register()">REGISTER</button>
-            <br><br><strong>{{ registerMessage }}</strong>
-        </p>
-    </div>
+    <button class="buttonToggle" (click)="toggle()">{{ loginToggle }}</button>
+    <ng-template [ngIf]="displayToggle" [ngIfElse]="registration">
+        <div class="play-container">
+            <h2>Login</h2>
+            <p>
+                Please enter your username and password. <br><br>
+                <input type="email" [(ngModel)]="username" (keydown)="resetMessage()" placeholder="Email"><br>
+                <input type="password" [(ngModel)]="password" (keydown)="resetMessage()" placeholder="Password"><br>
+                <button (click) = "login()">LOGIN</button>
+                <br><br><strong>{{ loginMessage }}</strong>
+            </p>
+        </div>
+    </ng-template>
+    <ng-template #registration>
+        <div class="play-container">
+            <h2>Registration</h2>
+            <p>
+                Register here if you are not registered yet. You will be automatically logged in once you have registered. <br><br>
+                <input type="text" [(ngModel)]="registerName" (keydown)="resetMessage()" placeholder="Name"><br>
+                <input type="email" [(ngModel)]="registerUsername" [style.border-color]="emailColor" (keydown)="resetMessage()" placeholder="Email"><br>
+                <input type="password" [(ngModel)]="registerPassword" [style.border-color]="passwordColor" (keydown)="resetMessage()" placeholder="Password"><br>
+                <button (click) = "register()">REGISTER</button>
+                <br><br><strong>{{ registerMessage }}</strong>
+            </p>
+        </div>
+    </ng-template>
 </ng-template>

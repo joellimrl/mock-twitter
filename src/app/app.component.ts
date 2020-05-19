@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { Globals } from "./globals";  
+import { Cookies } from './cookie.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'mock-twitter';
 
-  constructor(){}
-  ngOnInit(){}
+  constructor(private cookieService: Cookies) {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  ngOnInit() {}
 
-  get loginStatus(){
-      return Globals.loginStatus;
+  get loginStatus() {
+    return this.cookieService.loginStatus('get');
   }
 }
