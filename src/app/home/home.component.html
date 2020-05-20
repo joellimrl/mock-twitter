@@ -11,7 +11,7 @@
     <ng-template #tweetsDisplay>
         <ul>
             <li *ngFor="let tweet of tweets">
-                <app-tweet-component [tweet]="tweet"></app-tweet-component>
+                <app-tweet-component (loadTweets)="loadTweets()" [tweet]="tweet"></app-tweet-component>
             </li>
         </ul>
     </ng-template>

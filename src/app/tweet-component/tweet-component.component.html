@@ -3,22 +3,22 @@
     <div class="details">
         <mat-icon>account_circle</mat-icon>
         <div>
-            <span class="name">{{ tweet.author }}</span><br>
+            <span class="name">{{ tweet.author.name }}</span><br>
             <span>{{tweet.message}}</span><br>
         </div>
     </div> 
     <footer>
         <div>
-            <button (click)="clickLike()">
+            <button mat-raised-button class="likes" [style.color]="likesColor" (click)="clickLike()">
                 <mat-icon>thumb_up</mat-icon>
             </button>
-            {{tweet.likes}}
+            {{tweet.likes.length}}
         </div>
-        <button (click)="clickComment()"><mat-icon>comment</mat-icon></button>
-        <button><mat-icon>loop</mat-icon></button>
-        <button><mat-icon>share</mat-icon></button>
+        <button mat-raised-button (click)="openModal()"><mat-icon>comment</mat-icon></button>
+        <button mat-raised-button><mat-icon>loop</mat-icon></button>
+        <button mat-raised-button><mat-icon>share</mat-icon></button>
     </footer>
-    <div class="addingComment" *ngIf="addingComment">
+    <!-- <div class="addingComment" *ngIf="addingComment">
         <input type="text" [(ngModel)]="comment" placeholder="Write a comment here"><br>
         <button (click) = "addComment()">Comment</button>
     </div>
@@ -34,5 +34,5 @@
                 </div>
             </li>
         </ul>
-    </div>
+    </div> -->
 </div>

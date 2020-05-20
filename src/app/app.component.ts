@@ -14,6 +14,6 @@ export class AppComponent {
   ngOnInit() {}
 
   get loginStatus() {
-    return this.cookieService.loginStatus('get');
+    return this.cookieService.currentUser('get');
   }
 }

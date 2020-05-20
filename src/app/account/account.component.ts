@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookies } from '../cookie.service';
-import { CurrentUser } from '../globals';
+import { ShortUser } from '../globals';
 
 @Component({
   selector: 'app-account',
@@ -9,12 +9,12 @@ import { CurrentUser } from '../globals';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
-  currentUser: CurrentUser;
+  currentUser: ShortUser;
   constructor(private router: Router, private cookieService: Cookies) {}
 
   ngOnInit(): void {
     // Check if user is logged in
-    if (!this.cookieService.loginStatus('get')) {
+    if (!this.cookieService.currentUser('get')) {
       alert('You have not logged in yet! Please login or register first.');
       this.router.navigate(['/']).then(null, (err) => {
         alert('An error has occurred, please try again.');
@@ -27,7 +27,6 @@ export class AccountComponent implements OnInit {
   // TODO Delete account, follow user (from home page)
 
   logout() {
-    this.cookieService.loginStatus('set', 'false');
     this.cookieService.currentUser('set', null);
     this.router.navigate(['/']).then(
       () => {

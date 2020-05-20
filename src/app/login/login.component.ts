@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookies } from '../cookie.service';
-import { User, CurrentUser } from '../globals';
+import { User, ShortUser } from '../globals';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   emailColor: string;
   passwordColor: string;
 
-  currentUser: CurrentUser;
+  currentUser: ShortUser;
 
   constructor(private router: Router, private cookieService: Cookies) {}
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   get loginStatus() {
     // Get login status from cookies
-    return this.cookieService.loginStatus('get');
+    return this.cookieService.currentUser('get');
   }
 
   // Toggle logic between login and registration
@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
         name: currentUser.name,
         email: currentUser.email,
       });
-      this.cookieService.loginStatus('set', 'true');
 
       this.router.navigate(['/home']).then(null, (err) => {
         alert('An error has occurred, please try again.');
@@ -118,8 +117,7 @@ export class LoginComponent implements OnInit {
               email: this.registerUsername,
               password: this.registerPassword,
               tweets: [],
-              // Follow yourself to include tweets, logic will be enhanced in the future
-              follows: [this.registerUsername],
+              follows: [],
             };
             this.cookieService.addUser(newUser);
             alert('Registered successfully, logging in now.');
