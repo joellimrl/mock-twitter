@@ -7,8 +7,6 @@ import { Cookies } from './cookie.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'mock-twitter';
-
   constructor(private cookieService: Cookies) {}
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   ngOnInit() {}

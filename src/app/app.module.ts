@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { TweetComponentComponent } from './tweet-component/tweet-component.component';
+import { CommentsComponent } from './comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TweetComponentComponent } from './tweet-component/tweet-component.compo
     AccountComponent,
     LoginComponent,
     TweetComponentComponent,
+    CommentsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, MatIconModule],
   providers: [CookieService],

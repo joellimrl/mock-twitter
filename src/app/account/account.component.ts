@@ -10,7 +10,7 @@ import { ShortUser } from '../globals';
 })
 export class AccountComponent implements OnInit {
   currentUser: ShortUser;
-  constructor(private router: Router, private cookieService: Cookies) {}
+  constructor(public router: Router, private cookieService: Cookies) {}
 
   ngOnInit(): void {
     // Check if user is logged in

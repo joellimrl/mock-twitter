@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Tweet, ShortUser } from '../globals';
 import { Cookies } from '../cookie.service';
 
@@ -12,13 +13,9 @@ export class TweetComponentComponent implements OnInit {
   @Output('loadTweets') loadTweets: EventEmitter<Function> = new EventEmitter();
   currentUser: ShortUser;
 
-  // comments: Comment[] = [];
-  // comment = '';
-  // addingCommentFlag = false;
   likesColor: string;
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private cookieService: Cookies) {}
+  constructor(private router: Router, private cookieService: Cookies) {}
 
   ngOnInit(): void {
     this.currentUser = this.cookieService.currentUser('get');
@@ -28,8 +25,8 @@ export class TweetComponentComponent implements OnInit {
       this.likesColor = 'rgb(111, 0, 255)';
   }
 
+  // TODO Add date for each tweet, create remove tweet functionality
   clickLike() {
-    // check if already liked
     if (!this.tweet.likes.find((email) => email === this.currentUser.email)) {
       this.cookieService.addLike(this.currentUser, this.tweet);
       this.likesColor = 'rgb(111, 0, 255)';
@@ -40,35 +37,10 @@ export class TweetComponentComponent implements OnInit {
     this.loadTweets.emit();
   }
 
-  // addComment() {
-  //   this.addingCommentFlag = false;
-  //   if (this.comment.trim() === '') return;
-  //   // const newComment = { message: this.comment, author: Globals.user };
-  //   // this.tweet.comments.push(newComment);
-  //   this.comment = '';
-  // }
-
-  // get haveComments() {
-  //   return this.comments.length > 0;
-  // }
-
-  // get addingComment() {
-  //   return this.addingCommentFlag;
-  // }
-
-  // clickComment() {
-  //   this.addingCommentFlag = !this.addingCommentFlag;
-  // }
-
-  openModal() {
-    // const dialogConfig = new MatDialogConfig();
-    // // The user can't close the dialog by clicking outside its body
-    // dialogConfig.disableClose = false;
-    // dialogConfig.id = 'modal-component';
-    // // https://material.angular.io/components/dialog/overview
-    // const modalDialog = this.matDialog.open(
-    //   CommentModalComponent,
-    //   dialogConfig
-    // );
+  clickComment() {
+    this.router.navigate([`/home/${this.tweet.id}`]).then(null, (err) => {
+      alert('An error has occurred, please try again.');
+      console.log(err);
+    });
   }
 }

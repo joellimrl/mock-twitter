@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookies } from '../cookie.service';
-import { User, ShortUser } from '../globals';
+import { User, ShortUser, generateRandomID } from '../globals';
 
 @Component({
   selector: 'app-login',
@@ -76,6 +76,7 @@ export class LoginComponent implements OnInit {
       // Successful login, set current user and login status, navigate to home
       this.loginMessage = 'Welcome back!';
       this.cookieService.currentUser('set', {
+        id: currentUser.id,
         name: currentUser.name,
         email: currentUser.email,
       });
@@ -113,6 +114,7 @@ export class LoginComponent implements OnInit {
           if (this.validate('password', this.registerPassword)) {
             // Successful validation, proceed to register user in global user cookies and login.
             const newUser: User = {
+              id: generateRandomID(),
               name: this.registerName,
               email: this.registerUsername,
               password: this.registerPassword,

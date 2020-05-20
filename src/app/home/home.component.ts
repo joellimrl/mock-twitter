@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookies } from '../cookie.service';
-import { Tweet, ShortUser } from '../globals';
+import { Tweet, ShortUser, generateRandomID } from '../globals';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +15,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private cookieService: Cookies) {}
 
-  // TODO Get tweets from cookies, add follow system, move comments separate (tweet id, separate cookies for comments?)
-  // Edit tweet component to not show comments, move comments to separate component with new page
-  // add page to routes
+  // TODO add follow system,
   // following system, click on user name or icon, popup modal for account page to follow
   ngOnInit(): void {
     // Check if user is logged in
@@ -49,7 +47,7 @@ export class HomeComponent implements OnInit {
     if (this.message.trim() === '') return;
     // add tweet to cookies
     const newTweet: Tweet = {
-      id: Math.random(),
+      id: `${this.currentUser.id}_${generateRandomID()}`,
       author: this.currentUser,
       message: this.message,
       likes: [],

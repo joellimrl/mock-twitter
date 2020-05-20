@@ -1,4 +1,5 @@
 export const mockUser: User = {
+  id: 8485938374,
   name: 'Joel',
   email: 'e',
   password: 'e',
@@ -16,11 +17,13 @@ export const COOKIE_NAMES = {
 };
 
 export interface ShortUser {
+  id: number;
   name: string;
   email: string;
 }
 
 export interface User {
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -29,7 +32,7 @@ export interface User {
 }
 
 export interface Tweet {
-  id: number;
+  id: string;
   author: ShortUser;
   message: string;
   likes: string[];
@@ -38,7 +41,12 @@ export interface Tweet {
 }
 
 export interface Comment {
+  id: number;
   author: ShortUser;
   message: string;
   date: Date;
+}
+
+export function generateRandomID() {
+  return Math.floor(Math.random() * 100000000);
 }

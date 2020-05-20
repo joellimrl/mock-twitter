@@ -7,6 +7,7 @@ import {
   mockUser,
   Globals,
   Tweet,
+  Comment,
 } from './globals';
 
 @Injectable({
@@ -81,12 +82,37 @@ export class Cookies {
   }
 
   // Tweets
+  getTweet(tweetId: string) {
+    try {
+      const globalUsers = (JSON.parse(
+        this.cookieService.get(COOKIE_NAMES.GLOBAL_USERS)
+      ) as unknown) as User[];
+      const id = tweetId.split('_');
+      const author = globalUsers.find((user) => user.id === Number(id[0]));
+      return author.tweets.find((tweet) => tweet.id === tweetId);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   addTweet(currentUser: ShortUser, tweet: Tweet) {
     this.editGlobal((globalUsers) => {
       const objIndex = globalUsers.findIndex(
         (user: User) => user.email === currentUser.email
       );
-      globalUsers[objIndex].tweets.push(tweet);
+      globalUsers[objIndex].tweets.unshift(tweet);
+    });
+  }
+
+  removeTweet(currentUser: ShortUser, tweet: Tweet) {
+    this.editGlobal((globalUsers) => {
+      const objIndex = globalUsers.findIndex(
+        (user: User) => user.email === currentUser.email
+      );
+      const tweetIndex = globalUsers[objIndex].tweets.findIndex(
+        (t: Tweet) => t.id === tweet.id
+      );
+      globalUsers[objIndex].tweets.splice(tweetIndex, 1);
     });
   }
 
@@ -117,5 +143,31 @@ export class Cookies {
     });
   }
 
+  addComment(currentUser: ShortUser, tweet: Tweet, comment: Comment) {
+    this.editGlobal((globalUsers) => {
+      const objIndex = globalUsers.findIndex(
+        (user: User) => user.email === currentUser.email
+      );
+      const tweetIndex = globalUsers[objIndex].tweets.findIndex(
+        (t: Tweet) => t.id === tweet.id
+      );
+      globalUsers[objIndex].tweets[tweetIndex].comments.unshift(comment);
+    });
+  }
+
+  removeComment(currentUser: ShortUser, tweet: Tweet, comment: Comment) {
+    this.editGlobal((globalUsers) => {
+      const objIndex = globalUsers.findIndex(
+        (user: User) => user.email === currentUser.email
+      );
+      const tweetIndex = globalUsers[objIndex].tweets.findIndex(
+        (t: Tweet) => t.id === tweet.id
+      );
+      const commentIndex = globalUsers[objIndex].tweets[
+        tweetIndex
+      ].comments.findIndex((c: Comment) => c.id === comment.id);
+      globalUsers[objIndex].tweets[tweetIndex].comments.splice(commentIndex, 1);
+    });
+  }
   // addFollow() {}
 }
