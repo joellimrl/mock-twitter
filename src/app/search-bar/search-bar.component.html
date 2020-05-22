@@ -1,0 +1,19 @@
+<div>
+    <div class="searchUser">
+        <input type="text" [(ngModel)]="searchText" placeholder="Search here!" (keyup)="search()">
+    </div>
+    <div class="userList">
+        <ul>
+            <li *ngFor="let user of filteredUsers">
+                <div class="userBox" (click)="clickUser(user)">
+                    <div class="user" >
+                        <mat-icon>account_circle</mat-icon>
+                        <span class="name">{{ user.name }}</span><br>
+                        <span class="email">{{ user.email }}</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div *ngIf="noUsersFound" class="emptyMessage">Could not find anyone!</div>
+    </div>
+</div>

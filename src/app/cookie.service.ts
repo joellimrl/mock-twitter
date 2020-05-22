@@ -47,12 +47,23 @@ export class Cookies {
     }
   }
 
+  // Get all users
+  getGlobalUsers() {
+    try {
+      return (JSON.parse(
+        this.cookieService.get(COOKIE_NAMES.GLOBAL_USERS)
+      ) as unknown) as User[];
+    } catch (e) {
+      console.log(e);
+      alert('Something went wrong, please try again.');
+      throw e;
+    }
+  }
+
   // HOF for editing global users cookie since alot of methods use this
   editGlobal(fn: Function) {
     try {
-      const globalUsers = (JSON.parse(
-        this.cookieService.get(COOKIE_NAMES.GLOBAL_USERS)
-      ) as unknown) as User[];
+      const globalUsers = this.getGlobalUsers();
       fn(globalUsers);
       this.setCookie(COOKIE_NAMES.GLOBAL_USERS, JSON.stringify(globalUsers));
     } catch (e) {
@@ -71,11 +82,17 @@ export class Cookies {
 
   findUser(email: string): User {
     try {
-      const globalUsers = (JSON.parse(
-        this.cookieService.get(COOKIE_NAMES.GLOBAL_USERS)
-      ) as unknown) as User[];
-      console.log(globalUsers);
+      const globalUsers = this.getGlobalUsers();
       return globalUsers.find((user) => user.email === email);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  findUserById(id: number): User {
+    try {
+      const globalUsers = this.getGlobalUsers();
+      return globalUsers.find((user) => user.id === id);
     } catch (e) {
       console.log(e);
     }
@@ -84,9 +101,7 @@ export class Cookies {
   // Tweets
   getTweet(tweetId: string) {
     try {
-      const globalUsers = (JSON.parse(
-        this.cookieService.get(COOKIE_NAMES.GLOBAL_USERS)
-      ) as unknown) as User[];
+      const globalUsers = this.getGlobalUsers();
       const id = tweetId.split('_');
       const author = globalUsers.find((user) => user.id === Number(id[0]));
       return author.tweets.find((tweet) => tweet.id === tweetId);
@@ -119,7 +134,7 @@ export class Cookies {
   addLike(currentUser: ShortUser, tweet: Tweet) {
     this.editGlobal((globalUsers) => {
       const objIndex = globalUsers.findIndex(
-        (user: User) => user.email === currentUser.email
+        (user: User) => user.email === tweet.author.email
       );
       const tweetIndex = globalUsers[objIndex].tweets.findIndex(
         (t: Tweet) => t.id === tweet.id
@@ -131,7 +146,7 @@ export class Cookies {
   removeLike(currentUser: ShortUser, tweet: Tweet) {
     this.editGlobal((globalUsers) => {
       const objIndex = globalUsers.findIndex(
-        (user: User) => user.email === currentUser.email
+        (user: User) => user.email === tweet.author.email
       );
       const tweetIndex = globalUsers[objIndex].tweets.findIndex(
         (t: Tweet) => t.id === tweet.id
@@ -143,10 +158,10 @@ export class Cookies {
     });
   }
 
-  addComment(currentUser: ShortUser, tweet: Tweet, comment: Comment) {
+  addComment(tweet: Tweet, comment: Comment) {
     this.editGlobal((globalUsers) => {
       const objIndex = globalUsers.findIndex(
-        (user: User) => user.email === currentUser.email
+        (user: User) => user.email === tweet.author.email
       );
       const tweetIndex = globalUsers[objIndex].tweets.findIndex(
         (t: Tweet) => t.id === tweet.id
@@ -155,10 +170,10 @@ export class Cookies {
     });
   }
 
-  removeComment(currentUser: ShortUser, tweet: Tweet, comment: Comment) {
+  removeComment(tweet: Tweet, comment: Comment) {
     this.editGlobal((globalUsers) => {
       const objIndex = globalUsers.findIndex(
-        (user: User) => user.email === currentUser.email
+        (user: User) => user.email === tweet.author.email
       );
       const tweetIndex = globalUsers[objIndex].tweets.findIndex(
         (t: Tweet) => t.id === tweet.id
@@ -169,5 +184,26 @@ export class Cookies {
       globalUsers[objIndex].tweets[tweetIndex].comments.splice(commentIndex, 1);
     });
   }
-  // addFollow() {}
+
+  // Follow system
+  addFollow(currentUser: ShortUser, userEmail: string) {
+    this.editGlobal((globalUsers) => {
+      const objIndex = globalUsers.findIndex(
+        (user: User) => user.email === currentUser.email
+      );
+      globalUsers[objIndex].follows.push(userEmail);
+    });
+  }
+
+  removeFollow(currentUser: ShortUser, userEmail: string) {
+    this.editGlobal((globalUsers) => {
+      const objIndex = globalUsers.findIndex(
+        (user: User) => user.email === currentUser.email
+      );
+      const followIndex = globalUsers[objIndex].follows.findIndex(
+        (e: string) => e === userEmail
+      );
+      globalUsers[objIndex].follows.splice(followIndex, 1);
+    });
+  }
 }

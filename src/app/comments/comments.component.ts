@@ -83,7 +83,7 @@ export class CommentsComponent implements OnInit {
       message: this.comment,
       date: new Date(),
     };
-    this.cookieService.addComment(this.currentUser, this.tweet, newComment);
+    this.cookieService.addComment(this.tweet, newComment);
     this.refreshComments();
     this.comment = '';
   }

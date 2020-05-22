@@ -11,6 +11,7 @@ import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './login/login.component';
 import { TweetComponentComponent } from './tweet-component/tweet-component.component';
 import { CommentsComponent } from './comments/comments.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CommentsComponent } from './comments/comments.component';
     LoginComponent,
     TweetComponentComponent,
     CommentsComponent,
+    SearchBarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, MatIconModule],
   providers: [CookieService],

@@ -1,0 +1,49 @@
+
+.userList {
+    ul {
+        list-style-type: '';
+        margin: 0;
+        padding: 0;
+    }
+
+    .userBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        border: 1px solid lightgray;
+        margin: .2em;
+        padding: .5em;
+        cursor: pointer;
+
+        .user {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .name {
+            font-weight: bold;
+            padding: .1em;
+        }
+
+        .email {
+            padding-left: 1em;
+        }
+    }
+}
+
+.searchUser {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    input {
+        flex: 3;
+        margin: .5em;
+        padding: 1em;
+    }
+}
+
+.emptyMessage {
+    padding: 1em;
+    text-align: center;
+}

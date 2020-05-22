@@ -1,8 +1,8 @@
 export const mockUser: User = {
   id: 8485938374,
-  name: 'Joel',
-  email: 'e',
-  password: 'e',
+  name: 'Joel Lim',
+  email: 'joel.lim@candelalabs.io',
+  password: 'password',
   tweets: [],
   follows: [],
 };

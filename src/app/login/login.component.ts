@@ -81,10 +81,13 @@ export class LoginComponent implements OnInit {
         email: currentUser.email,
       });
 
-      this.router.navigate(['/home']).then(null, (err) => {
-        alert('An error has occurred, please try again.');
-        console.log(err);
-      });
+      this.router.navigate(['/home']).then(
+        () => window.location.reload(),
+        (err) => {
+          alert('An error has occurred, please try again.');
+          console.log(err);
+        }
+      );
     } else {
       // Failed login, reset input fields
       this.loginMessage = 'Login has failed, please try again';

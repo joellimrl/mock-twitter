@@ -1,8 +1,20 @@
-<h1>Your account details: {{ currentUser.name }}</h1>
-
-<div class="play-container">
-    <p>
-        Would you like to logout now? <br><br>
-        <button (click) = "logout()">LOGOUT</button>
-    </p>
+<div class="container">
+    <div class="account">
+        <h1>{{ accountUser.name }}</h1>
+        <div *ngIf="isCurrentUser" class="play-container">
+            <p>
+                Would you like to logout now? <br><br>
+                <button (click) = "logout()">LOGOUT</button>
+            </p>
+        </div>
+        <div class="play-container" *ngIf="!isCurrentUser">
+            <p>
+                {{ followMessage }}
+                <button (click) = "clickFollow()">{{ followButton }}</button>
+            </p>
+        </div>
+    </div>
+    <div class="search">
+        <app-search-bar [currentUser]="currentUser"></app-search-bar>
+    </div>
 </div>
