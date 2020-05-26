@@ -72,7 +72,7 @@ export class CommentsComponent implements OnInit {
     }
   }
 
-  // TODO remove comment function, only for the author
+  // TODO implement delete comment
 
   addComment() {
     this.addingCommentFlag = false;

@@ -62,7 +62,7 @@ export class AccountComponent implements OnInit {
     return this.currentUser.id === this.accountUser.id;
   }
 
-  // TODO Delete account, follow user (from home page)
+  // TODO Delete account, add more account information
 
   logout() {
     this.cookieService.currentUser('set', null);

@@ -6,10 +6,6 @@ export const mockUser: User = {
   tweets: [],
   follows: [],
 };
-export class Globals {
-  public static currentUser: ShortUser = null;
-  // TODO Cache the users, convert to User[], move tweets to individual user.
-}
 
 export const COOKIE_NAMES = {
   CURRENT_USER: 'current-user',

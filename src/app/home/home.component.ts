@@ -15,8 +15,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private cookieService: Cookies) {}
 
-  // TODO add follow system,
-  // following system, click on user name or icon, popup modal for account page to follow
   ngOnInit(): void {
     // Check if user is logged in
     const currentUser = this.cookieService.currentUser('get');

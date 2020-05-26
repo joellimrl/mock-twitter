@@ -5,7 +5,6 @@ import {
   COOKIE_NAMES,
   ShortUser,
   mockUser,
-  Globals,
   Tweet,
   Comment,
 } from './globals';
@@ -21,8 +20,6 @@ export class Cookies {
     }
     if (!this.cookieService.check(COOKIE_NAMES.CURRENT_USER)) {
       this.setCookie(COOKIE_NAMES.CURRENT_USER, null);
-    } else {
-      Globals.currentUser = this.currentUser('get');
     }
   }
 
@@ -40,7 +37,6 @@ export class Cookies {
       }
       if (method === 'set') {
         this.setCookie(COOKIE_NAMES.CURRENT_USER, JSON.stringify(user));
-        Globals.currentUser = user;
       }
     } catch (e) {
       console.log(e);
