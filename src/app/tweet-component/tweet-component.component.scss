@@ -10,19 +10,45 @@
 .details {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    cursor: pointer;
 
     mat-icon {
         font-size: 2em;
         padding: .5em;
     }
 
-    div {
+    .text {
         padding: .5em;
+        flex: 1;
 
         .name {
             font-size: 1.3em;
             font-weight: bold;
+        }
+
+        .date {
+            padding-left: .5em;
+            color: grey;
+        }
+    }
+
+    .delete {
+        right: 0;
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-radius: 50%;
+        }
+
+        button:hover {
+            background-color: rgb(165, 252, 252);
+        }
+
+        mat-icon {
+            font-size: 1.5em;
+            padding: 0;
         }
     }
 }

@@ -62,8 +62,6 @@ export class AccountComponent implements OnInit {
     return this.currentUser.id === this.accountUser.id;
   }
 
-  // TODO Delete account, add more account information
-
   logout() {
     this.cookieService.currentUser('set', null);
     this.router.navigate(['/']).then(
@@ -75,6 +73,26 @@ export class AccountComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  deleteAccount() {
+    if (
+      window.confirm(
+        'Are you sure you would like to delete your account?\nNote: This is irreversible!'
+      )
+    ) {
+      this.cookieService.removeUser(this.currentUser);
+      this.cookieService.currentUser('set', null);
+      this.router.navigate(['/']).then(
+        () => {
+          alert('Your account has been deleted, going back to login screen.');
+        },
+        (err) => {
+          alert('An error has occurred, please try again.');
+          console.log(err);
+        }
+      );
+    }
   }
 
   addFollow() {

@@ -3,7 +3,8 @@
     <div class="details" routerLink="/home/{{tweet.id}}">
         <mat-icon>account_circle</mat-icon>
         <div>
-            <span class="name">{{ tweet.author.name }}</span><br>
+            <span class="name">{{ tweet.author.name }}</span>
+            <span class="date">{{tweet.date | date: 'dd MMM yyyy, h:mm:ss a'}}</span><br>
             <span>{{tweet.message}}</span><br>
         </div>
     </div> 
@@ -28,7 +29,11 @@
                 <div class="comment">
                     <div class="user">
                         <mat-icon>account_circle</mat-icon>
-                        <span class="name">{{ comment.author.name }}</span><br>
+                        <span class="name">{{ comment.author.name }}</span>
+                        <span class="date">{{ comment.date | date: 'dd MMM yyyy, h:mm:ss a'}}</span><br>
+                        <ng-template class="delete" [ngIf]="isAuthor(comment)">
+                            <button mat-raised-button (click)="deleteComment(comment)"><mat-icon>close</mat-icon></button>
+                        </ng-template>
                     </div>
                     <span class="message">{{comment.message}}</span>
                 </div>

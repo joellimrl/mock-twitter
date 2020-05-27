@@ -25,7 +25,6 @@ export class TweetComponentComponent implements OnInit {
       this.likesColor = 'rgb(111, 0, 255)';
   }
 
-  // TODO Add date for each tweet, create remove tweet functionality
   clickLike() {
     if (!this.tweet.likes.find((email) => email === this.currentUser.email)) {
       this.cookieService.addLike(this.currentUser, this.tweet);
@@ -42,5 +41,16 @@ export class TweetComponentComponent implements OnInit {
       alert('An error has occurred, please try again.');
       console.log(err);
     });
+  }
+
+  deleteTweet() {
+    if (window.confirm('Are you sure you would like to delete this tweet?')) {
+      this.cookieService.removeTweet(this.currentUser, this.tweet);
+      this.loadTweets.emit();
+    }
+  }
+
+  isAuthor(tweet: Tweet) {
+    return tweet.author.id === this.currentUser.id;
   }
 }

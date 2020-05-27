@@ -25,6 +25,11 @@
             font-size: 1.3em;
             font-weight: bold;
         }
+        
+        .date {
+            padding-left: .5em;
+            color: grey;
+        }
     }
 }
 
@@ -64,6 +69,7 @@ footer {
         .user {
             display: flex;
             flex-direction: row;
+            align-items: center;
         }
         
         .name {
@@ -71,8 +77,26 @@ footer {
             padding: .1em;
         }
 
+        .date {
+            color: grey;
+            font-size: .9em;
+            padding-left: .5em;
+            flex: 1;
+        }
+
         .message {
             padding-left: 1em;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-radius: 50%;
+        }
+
+        button:hover {
+            background-color: rgb(165, 252, 252);
         }
     }
 }
@@ -91,7 +115,7 @@ footer {
     button {
         flex: 1;
         font-weight: bold;
-        background: rgb(94, 236, 229);
+        background: rgb(165, 252, 252);
         padding: 1em;
         margin: .5em;
         cursor: pointer;

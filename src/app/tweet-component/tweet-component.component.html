@@ -2,9 +2,16 @@
 <div class="play-container">
     <div class="details" routerLink="/home/{{tweet.id}}">
         <mat-icon>account_circle</mat-icon>
-        <div>
-            <span class="name">{{ tweet.author.name }}</span><br>
+        <div class="text">
+            <span class="name">{{ tweet.author.name }}</span>
+            <span class="date">{{tweet.date | date: 'dd MMM yyyy, h:mm:ss a'}}</span>
+            <br>
             <span>{{tweet.message}}</span><br>
+        </div>
+        <div class="delete">
+            <ng-template [ngIf]="isAuthor(tweet)">
+                <button mat-raised-button (click)="deleteTweet()"><mat-icon>close</mat-icon></button>
+            </ng-template>
         </div>
     </div> 
     <footer>

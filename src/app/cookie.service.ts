@@ -14,7 +14,6 @@ import {
 })
 export class Cookies {
   constructor(private cookieService: CookieService) {
-    // this.cookieService.deleteAll();
     if (!this.cookieService.check(COOKIE_NAMES.GLOBAL_USERS)) {
       this.setCookie(COOKIE_NAMES.GLOBAL_USERS, JSON.stringify([mockUser]));
     }
@@ -69,10 +68,17 @@ export class Cookies {
     }
   }
 
-  // Login
+  // Users
   addUser(user: User) {
     this.editGlobal((globalUsers) => {
       globalUsers.push(user);
+    });
+  }
+
+  removeUser(user: ShortUser) {
+    this.editGlobal((globalUsers) => {
+      const userIndex = globalUsers.findIndex((u: User) => u.id === user.id);
+      globalUsers.splice(userIndex, 1);
     });
   }
 

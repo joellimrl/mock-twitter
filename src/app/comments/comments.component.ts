@@ -51,7 +51,6 @@ export class CommentsComponent implements OnInit {
         console.log(err);
       });
     }
-    console.log(this.tweet);
     this.comments = this.tweet.comments;
   }
 
@@ -70,18 +69,29 @@ export class CommentsComponent implements OnInit {
       this.cookieService.removeLike(this.currentUser, this.tweet);
       this.likesColor = 'black';
     }
+    this.refreshComments();
   }
 
-  // TODO implement delete comment
+  deleteComment(comment: Comment) {
+    if (window.confirm('Are you sure you would like to delete this comment?')) {
+      this.cookieService.removeComment(this.tweet, comment);
+      this.refreshComments();
+    }
+  }
+
+  isAuthor(comment: Comment) {
+    return comment.author.id === this.currentUser.id;
+  }
 
   addComment() {
     this.addingCommentFlag = false;
     if (this.comment.trim() === '') return;
+    const dateNow = new Date();
     const newComment: Comment = {
       id: generateRandomID(),
       author: this.currentUser,
       message: this.comment,
-      date: new Date(),
+      date: dateNow,
     };
     this.cookieService.addComment(this.tweet, newComment);
     this.refreshComments();

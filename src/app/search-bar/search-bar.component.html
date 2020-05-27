@@ -4,7 +4,7 @@
     </div>
     <div class="userList">
         <ul>
-            <li *ngFor="let user of filteredUsers">
+            <li *ngFor="let user of filteredUsers" [style.color]="following(user)">
                 <div class="userBox" (click)="clickUser(user)">
                     <div class="user" >
                         <mat-icon>account_circle</mat-icon>

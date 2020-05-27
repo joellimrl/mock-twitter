@@ -12,6 +12,7 @@ export class SearchBarComponent implements OnInit {
   @Input() currentUser: ShortUser;
   allUsers: User[];
   filteredUsers: User[];
+  followsList: string[];
   searchText = '';
   constructor(private router: Router, public cookieService: Cookies) {}
 
@@ -23,10 +24,20 @@ export class SearchBarComponent implements OnInit {
 
     // use filtered users to display
     this.filteredUsers = this.allUsers;
+    this.followsList = this.cookieService.findUser(
+      this.currentUser.email
+    ).follows;
   }
 
   get noUsersFound() {
     return this.filteredUsers.length === 0;
+  }
+
+  following(user: User) {
+    if (this.followsList.includes(user.email)) return 'rgb(111, 0, 255)';
+    else {
+      return 'none';
+    }
   }
 
   search() {

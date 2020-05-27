@@ -1,11 +1,25 @@
 <div class="container">
     <div class="account">
         <h1>{{ accountUser.name }}</h1>
-        <div *ngIf="isCurrentUser" class="play-container">
-            <p>
-                Would you like to logout now? <br><br>
-                <button (click) = "logout()">LOGOUT</button>
-            </p>
+        <div *ngIf="isCurrentUser">
+            <div class="play-container">
+                <p>
+                    <strong>Details</strong><br><br>
+                    Email: {{accountUser.email}}
+                </p>
+            </div>
+            <div class="play-container">
+                <p>
+                    Would you like to logout now? <br><br>
+                    <button (click) = "logout()">LOGOUT</button>
+                </p>
+            </div>
+            <div class="play-container">
+                <p>
+                    Would you like to delete your account?<br><br>
+                    <button (click)="deleteAccount()">DELETE ACCOUNT</button>
+                </p>
+            </div>
         </div>
         <div class="play-container" *ngIf="!isCurrentUser">
             <p>

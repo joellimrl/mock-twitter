@@ -36,7 +36,11 @@ export class HomeComponent implements OnInit {
     const tweetsToDisplay = [...user.tweets];
     user.follows.forEach((email) => {
       const following = this.cookieService.findUser(email);
-      tweetsToDisplay.push(...following.tweets);
+      if (following) {
+        tweetsToDisplay.push(...following.tweets);
+      } else {
+        this.cookieService.removeFollow(this.currentUser, email);
+      }
     });
     this.tweets = tweetsToDisplay;
   }
